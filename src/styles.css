@@ -1,1 +1,109 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Roboto", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-russo: "Russo One", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-oxanium: "Oxanium", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --animate-progress: progress linear forwards;
+  @keyframes progress {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply max-w-screen;
+  }
+
+  body {
+    @apply bg-neutral-800 text-neutral-100 m-0;
+  }
+
+  body.overflow-hidden {
+    @apply overflow-hidden;
+  }
+
+  h2 {
+    @apply font-oxanium text-lg uppercase font-semibold mb-2;
+  }
+
+  input {
+    @apply bg-neutral-700 border-neutral-500 border h-12 px-4;
+  }
+
+  input.main {
+    @apply rounded-md py-2 outline-2 outline-offset-2 outline-transparent z-10 transition-all duration-200 ease-in-out;
+  }
+
+  input.main::placeholder {
+    @apply font-oxanium italic uppercase;
+  }
+
+  input.main:focus {
+    @apply border-transparent outline-blue-500;
+  }
+
+  input.upper {
+    @apply uppercase italic font-oxanium font-semibold pt-[0.65rem];
+  }
+
+  label {
+    @apply uppercase font-oxanium italic h-6;
+  }
+
+  button {
+    @apply font-oxanium uppercase italic font-semibold px-4 pt-[0.18rem] rounded-md border border-neutral-300 inline-flex items-center gap-2 justify-center h-12 text-base mt-2 transition-all duration-200 ease-in-out;
+  }
+
+  button:hover {
+    @apply border-neutral-400 bg-neutral-900;
+  }
+
+  button:active {
+    @apply border-neutral-100 bg-neutral-700 translate-y-0.5;
+  }
+
+  button:disabled {
+    @apply opacity-50 cursor-not-allowed pointer-events-none;
+  }
+
+  button lucide-icon {
+    @apply -translate-y-[0.08rem];
+  }
+
+  button.primary {
+    @apply bg-blue-600 border-blue-800;
+  }
+
+  button.primary:hover {
+    @apply bg-blue-700 border-blue-900;
+  }
+
+  button.primary:active {
+    @apply bg-blue-500 border-blue-500;
+  }
+
+  select {
+    @apply bg-neutral-700 border-neutral-500 border h-12 px-4 rounded-md outline-2 outline-offset-2 outline-transparent transition-all duration-200 ease-in-out font-oxanium uppercase italic font-semibold pt-[0.2rem];
+  }
+
+  select:focus {
+    @apply border-transparent outline-blue-500;
+  }
+}
+
+@layer components {
+  .input-group {
+    @apply flex flex-col relative mb-6;
+  }
+}

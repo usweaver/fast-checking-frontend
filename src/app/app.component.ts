@@ -1,12 +1,21 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { AlertsComponent } from './components/ui/alerts/alerts.component';
+import { HeaderComponent } from './components/shared/header/header.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { DrawerComponent } from './components/shared/drawer/drawer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    RouterOutlet,
+    AlertsComponent,
+    HeaderComponent,
+    NavbarComponent,
+    DrawerComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'fast-checking-frontend';
+  constructor(public router: Router) {}
 }

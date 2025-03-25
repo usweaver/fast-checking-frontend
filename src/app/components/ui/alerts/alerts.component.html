@@ -1,0 +1,21 @@
+<div class="fixed w-full z-50 flex flex-col gap-2 items-center p-4"
+  [ngClass]="router.url === '/login' ? 'bottom-0' : 'bottom-16'">
+  @for (alert of alertsStore.alerts(); track alert.id) {
+  <div [@alertAnimation] class="rounded-md w-full pl-4 pr-2 pt-2 pb-3 flex justify-between relative overflow-hidden"
+    [ngClass]="{
+        'bg-red-500': alert.type === 'error'
+      }">
+    <div class="flex items-center gap-4 mr-2">
+      <lucide-icon [img]="alertTypeToIcon(alert.type)" [strokeWidth]="3"></lucide-icon>
+      <span class="whitespace-pre-line uppercase font-semibold text-sm font-oxanium">{{alert.message}}</span>
+    </div>
+    <lucide-icon (click)="alertsStore.removeAlert(alert.id)" [img]="CircleX"></lucide-icon>
+    @if (alert.autoClose) {
+    <div class="absolute bottom-0 left-0 bg-neutral-950/80 h-2 w-0 animate-progress"
+      [style.animation-duration]="alert.duration + 'ms'"></div>
+    } @else {
+    <div class="absolute bottom-0 left-0 bg-neutral-950/80 h-2 w-full"></div>
+    }
+  </div>
+  }
+</div>

@@ -1,0 +1,10 @@
+@if (drawerService.isOpen()) {
+<div [@drawerAnimation]="drawerService.animationState()"
+  class="w-full bg-neutral-800 fixed bottom-0 rounded-t-lg p-4 z-50">
+  @if (drawerService.component(); as component) {
+  <ng-container class="w-full" [ngComponentOutlet]="component"></ng-container>
+  }
+</div>
+<div [@overlayAnimation]="drawerService.animationState()" class="bg-neutral-700/50 backdrop-blur-lg z-40 fixed inset-0">
+</div>
+}

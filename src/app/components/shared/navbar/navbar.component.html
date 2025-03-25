@@ -1,0 +1,11 @@
+<nav class="fixed bottom-0 w-full flex gap-2 items-center p-2">
+  <ul class="flex bg-neutral-600/60 backdrop-blur-lg p-1 rounded-xl w-3/4 h-13">
+    <li><app-navbar-link link="" [exactLink]="true"><lucide-icon [img]="House"></lucide-icon></app-navbar-link></li>
+    <li><app-navbar-link link="second"><lucide-icon [img]="AlignStartVertical"></lucide-icon></app-navbar-link>
+    </li>
+  </ul>
+  <div class="w-1/4 bg-blue-600/60 backdrop-blur-lg rounded-xl h-13 flex items-center justify-center [&_svg]:size-7"
+    (click)="drawerService.open(addTransactionDrawerComponent)">
+    <lucide-icon [img]="SquarePlus"></lucide-icon>
+  </div>
+</nav>
