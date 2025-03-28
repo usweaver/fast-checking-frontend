@@ -1,5 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap");
+
 @import "tailwindcss";
 
 @theme {
@@ -26,15 +26,23 @@
   }
 
   body {
-    @apply bg-neutral-800 text-neutral-100 m-0;
+    @apply bg-neutral-800 text-neutral-100 m-0 tracking-tight;
   }
 
   body.overflow-hidden {
     @apply overflow-hidden;
   }
 
+  h1 {
+    @apply font-oxanium text-2xl uppercase font-medium mb-3 italic text-center;
+  }
+
   h2 {
     @apply font-oxanium text-lg uppercase font-semibold mb-2;
+  }
+
+  hr {
+    @apply border-neutral-500 mt-1 mb-2;
   }
 
   input {

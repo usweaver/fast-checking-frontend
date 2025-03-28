@@ -23,7 +23,9 @@ export class BackendService {
   }
 
   get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}`);
+    return this.http
+      .get<T>(`${this.apiUrl}/${endpoint}`)
+      .pipe(catchError(this.handleError));
   }
 
   post<T>(endpoint: string, data: any): Observable<T> {
@@ -37,14 +39,18 @@ export class BackendService {
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.put<T>(`${this.apiUrl}/${endpoint}`, data, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    });
+    return this.http
+      .put<T>(`${this.apiUrl}/${endpoint}`, data, {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }),
+      })
+      .pipe(catchError(this.handleError));
   }
 
   delete<T>(endpoint: string): Observable<T> {
-    return this.http.delete<T>(`${this.apiUrl}/${endpoint}`);
+    return this.http
+      .delete<T>(`${this.apiUrl}/${endpoint}`)
+      .pipe(catchError(this.handleError));
   }
 }

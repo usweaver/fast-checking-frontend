@@ -12,6 +12,7 @@ import { UserStore } from '../../stores/user.store';
 import { BackendService } from '../../services/backend.service';
 import { InputErrorComponent } from '../ui/input-error/input-error.component';
 import { AlertsStore } from '../../stores/alerts.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-transaction-drawer',
@@ -35,8 +36,9 @@ export class AddTransactionDrawerComponent {
   constructor(
     public drawerService: DrawerService,
     public userStore: UserStore,
-    public backend: BackendService,
-    public alertsStore: AlertsStore
+    private backend: BackendService,
+    private alertsStore: AlertsStore,
+    private router: Router
   ) {
     this.addTransactionForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -58,7 +60,7 @@ export class AddTransactionDrawerComponent {
     formData.accountId = this.userStore.accounts()[0].id;
     this.backend.post('transactions', formData).subscribe({
       next: (response: any) => {
-        console.log(response);
+        this.router.navigate([`accounts/${this.userStore.accounts()[0].id}`]);
         this.drawerService.close();
       },
       error: (error: any) => {

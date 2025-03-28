@@ -1,0 +1,22 @@
+@if (transaction.id !== '') {
+<div class="w-full flex items-center py-2 font-oxanium font-semibold space-x-4">
+  <div class="w-1/8 flex flex-col justify-center items-center space-y-[-0.5rem]">
+    <span class="text-2xl">{{getTransactionDate(transaction.date).day}}</span>
+    <span class="text-xs text-neutral-400">{{getTransactionDate(transaction.date).month}} /
+      {{getTransactionDate(transaction.date).year}}</span>
+  </div>
+  <div class="italic uppercase flex flex-col grow">
+    <span>{{transaction.name}}</span>
+    <hr class="mb-1 mt-0">
+    <div class="text-xs text-neutral-400 inline-flex space-x-2 items-center">
+      <span>{{getCategoryName(transaction.categoryId)}}</span>
+      <i class="fa-solid fa-{{getCategoryIcon(transaction.categoryId)}} translate-y-[-0.05rem]"></i>
+    </div>
+  </div>
+  <div class="inline-flex space-x-1 justify-end" [ngClass]="transaction.type === 'debit' ?
+          'text-red-400' :
+          'text-green-400'
+        "><span>{{transaction.type === 'debit' ? '-' : '+'}}{{transaction.amount /
+      100 | number:'1.2-2'}}</span><span>€</span></div>
+</div>
+}

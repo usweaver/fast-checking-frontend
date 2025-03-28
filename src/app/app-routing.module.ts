@@ -2,19 +2,19 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './components/login/login.component';
-import { SecondComponent } from './components/second/second.component';
-import { FirstComponent } from './components/first/first.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AccountComponent } from './components/account/account.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '',
-    component: FirstComponent,
+    component: DashboardComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'second',
-    component: SecondComponent,
+    path: 'accounts/:accountId',
+    component: AccountComponent,
     canActivate: [AuthGuard],
   },
 ];

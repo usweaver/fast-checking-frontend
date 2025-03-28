@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { NavbarLinkComponent } from './navbar-link/navbar-link.component';
 import {
-  AlignStartVertical,
-  House,
+  ChartNoAxesCombined,
   LucideAngularModule,
   SquarePlus,
+  Wallet,
 } from 'lucide-angular';
 import { DrawerService } from '../../../services/drawer.service';
 import { AddTransactionDrawerComponent } from '../../add-transaction-drawer/add-transaction-drawer.component';
+import { UserStore } from '../../../stores/user.store';
 
 @Component({
   selector: 'app-navbar',
@@ -15,11 +16,18 @@ import { AddTransactionDrawerComponent } from '../../add-transaction-drawer/add-
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  readonly House = House;
-  readonly AlignStartVertical = AlignStartVertical;
+  readonly ChartNoAxesCombined = ChartNoAxesCombined;
+  readonly Wallet = Wallet;
   readonly SquarePlus = SquarePlus;
 
   addTransactionDrawerComponent = AddTransactionDrawerComponent;
 
-  constructor(public drawerService: DrawerService) {}
+  constructor(
+    public drawerService: DrawerService,
+    private userStore: UserStore
+  ) {}
+
+  getAccountPath(): string {
+    return `/accounts/${this.userStore.accounts()[0].id}`;
+  }
 }

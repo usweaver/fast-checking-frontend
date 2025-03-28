@@ -1,0 +1,36 @@
+@if (accountData$ | async; as data) {
+<div
+  class="w-full p-3 rounded-lg bg-neutral-900 inline-flex items-center justify-between  font-oxanium font-semibold text-lg pt-[1rem] mb-4">
+  <h2 class="mb-0">Solde actuel</h2>
+  <div [ngClass]="{
+    'text-red-400': data.balance < 0,
+    'text-green-400': data.balance >= 0
+  }">
+    <span class="mr-1">{{data.balance >= 0 ? '+' : ''}}{{data.balance | number:'1.2-2'}}</span>
+    <span>€</span>
+  </div>
+</div>
+<div class="flex px-3">
+  @if (isExistingNextMonth(monthData(), data.months)) {
+  <span
+    class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3"
+    (click)="setNextMonthData(monthData(), data.months)">
+    < {{getNextMonthTitle(monthData(), data.months)}}</span>
+      }
+      <div class="grow"></div>
+      @if (isExistingPreviousMonth(monthData(), data.months)) {
+      <span
+        class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3"
+        (click)="setPreviousMonthData(monthData(), data.months)">{{getPreviousMonthTitle(monthData(),
+        data.months)}} ></span>
+      }
+</div>
+<div class="bg-neutral-700 w-full pt-3 px-3 rounded-t-lg">
+  <h2 class="mb-0">{{getMonthTitle(monthData())}}</h2>
+</div>
+<div class="bg-neutral-700 w-full pb-3 px-3 rounded-b-lg">
+  @for (transaction of data.transactions; track transaction.id) {
+  <app-transaction-line [transaction]="transaction"></app-transaction-line>
+  }
+</div>
+} @else {<span class="italic font-oxanium font-semibold uppercase text-neutral-400">Chargement...</span>}
