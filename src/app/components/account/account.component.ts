@@ -6,6 +6,10 @@ import { Transaction } from '../../types';
 import { catchError, map, Observable } from 'rxjs';
 import { AsyncPipe, CommonModule, NgClass } from '@angular/common';
 import { TransactionLineComponent } from '../shared/transaction-line/transaction-line.component';
+import { LucideAngularModule, Pen } from 'lucide-angular';
+import { DrawerService } from '../../services/drawer.service';
+import { AddRegularizationDrawerComponent } from '../add-regularization-drawer/add-regularization-drawer.component';
+import { RefreshService } from '../../services/refresh.service';
 
 interface AccountData {
   balance: number;
@@ -15,21 +19,33 @@ interface AccountData {
 
 @Component({
   selector: 'app-account',
-  imports: [AsyncPipe, CommonModule, NgClass, TransactionLineComponent],
+  imports: [
+    AsyncPipe,
+    CommonModule,
+    NgClass,
+    TransactionLineComponent,
+    LucideAngularModule,
+  ],
   templateUrl: './account.component.html',
 })
 export class AccountComponent {
   accountData$!: Observable<AccountData>;
   accountId: string;
   monthData = signal<string>(this.getCurrentMonthAndYearParams());
+  readonly Pen = Pen;
+
+  addRegularizationDrawerComponent = AddRegularizationDrawerComponent;
 
   constructor(
     private backend: BackendService,
     private alertsStore: AlertsStore,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public drawerService: DrawerService,
+    private refreshService: RefreshService
   ) {
     this.accountId = this.activatedRoute.snapshot.params['accountId'];
     effect(() => {
+      this.refreshService.getRefreshSignal();
       this.loadAccountData(this.accountId, this.monthData());
     });
   }

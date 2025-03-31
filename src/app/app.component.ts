@@ -4,6 +4,7 @@ import { AlertsComponent } from './components/ui/alerts/alerts.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { DrawerComponent } from './components/shared/drawer/drawer.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { DrawerComponent } from './components/shared/drawer/drawer.component';
     HeaderComponent,
     NavbarComponent,
     DrawerComponent,
+    NgClass,
   ],
   templateUrl: './app.component.html',
 })

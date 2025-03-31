@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Transaction, TransactionDate } from '../../../types';
 import { CommonModule, NgClass } from '@angular/common';
 import { UserStore } from '../../../stores/user.store';
+import { DrawerService } from '../../../services/drawer.service';
+import { ShowTransactionDrawerComponent } from '../../show-transaction-drawer/show-transaction-drawer.component';
 
 @Component({
   selector: 'app-transaction-line',
@@ -21,7 +23,12 @@ export class TransactionLineComponent {
     accountId: '',
   };
 
-  constructor(private userStore: UserStore) {}
+  showTransactionDrawerComponent = ShowTransactionDrawerComponent;
+
+  constructor(
+    private userStore: UserStore,
+    public drawerService: DrawerService
+  ) {}
 
   getCategoryIcon(categoryId: string): string {
     const category = this.userStore

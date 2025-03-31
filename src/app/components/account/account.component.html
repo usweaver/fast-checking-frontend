@@ -1,32 +1,41 @@
 @if (accountData$ | async; as data) {
-<div
-  class="w-full p-3 rounded-lg bg-neutral-900 inline-flex items-center justify-between  font-oxanium font-semibold text-lg pt-[1rem] mb-4">
-  <h2 class="mb-0">Solde actuel</h2>
-  <div [ngClass]="{
+<div class="flex mb-4">
+  <div
+    class="w-full px-4 pb-3 rounded-l-lg bg-neutral-900 inline-flex items-center font-oxanium font-semibold text-lg pt-[1rem]">
+    <h2 class="mb-0">Solde actuel</h2>
+    <div class="grow"></div>
+    <div [ngClass]="{
     'text-red-400': data.balance < 0,
     'text-green-400': data.balance >= 0
   }">
-    <span class="mr-1">{{data.balance >= 0 ? '+' : ''}}{{data.balance | number:'1.2-2'}}</span>
-    <span>€</span>
+      <span class="mr-1">{{data.balance >= 0 ? '+' : ''}}{{data.balance | number:'1.2-2'}}</span>
+      <span>€</span>
+    </div>
+  </div>
+  <div
+    class="p-3 flex items-center justify-center bg-neutral-700 rounded-r-lg text-neutral-400 transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 hover:bg-neutral-600 active:bg-neutral-500 cursor-pointer"
+    (click)="drawerService.open(addRegularizationDrawerComponent, {currentBalance: data.balance})">
+    <lucide-icon [img]="Pen" size="16"></lucide-icon>
   </div>
 </div>
 <div class="flex px-3">
   @if (isExistingNextMonth(monthData(), data.months)) {
   <span
-    class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3"
+    class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3 cursor-pointer"
     (click)="setNextMonthData(monthData(), data.months)">
     < {{getNextMonthTitle(monthData(), data.months)}}</span>
       }
       <div class="grow"></div>
       @if (isExistingPreviousMonth(monthData(), data.months)) {
       <span
-        class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3"
+        class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3 cursor-pointer"
         (click)="setPreviousMonthData(monthData(), data.months)">{{getPreviousMonthTitle(monthData(),
         data.months)}} ></span>
       }
 </div>
 <div class="bg-neutral-700 w-full pt-3 px-3 rounded-t-lg">
-  <h2 class="mb-0">{{getMonthTitle(monthData())}}</h2>
+  <h2 class="mb-0 text-center">{{getMonthTitle(monthData())}}</h2>
+  <hr class="mb-0">
 </div>
 <div class="bg-neutral-700 w-full pb-3 px-3 rounded-b-lg">
   @for (transaction of data.transactions; track transaction.id) {

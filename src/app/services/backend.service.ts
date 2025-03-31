@@ -15,7 +15,6 @@ export class BackendService {
   constructor(private http: HttpClient) {}
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    console.log(error);
     return throwError(() => ({
       status: error.status,
       message: error.error.message,

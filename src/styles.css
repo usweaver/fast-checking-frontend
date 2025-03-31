@@ -33,6 +33,10 @@
     @apply overflow-hidden;
   }
 
+  #container.overflow-hidden {
+    @apply md:overflow-hidden;
+  }
+
   h1 {
     @apply font-oxanium text-2xl uppercase font-medium mb-3 italic text-center;
   }
@@ -99,6 +103,18 @@
 
   button.primary:active {
     @apply bg-blue-500 border-blue-500;
+  }
+
+  button.secondary {
+    @apply bg-red-600 border-red-800;
+  }
+
+  button.secondary:hover {
+    @apply bg-red-700 border-red-900;
+  }
+
+  button.secondary:active {
+    @apply bg-red-500 border-red-500;
   }
 
   select {

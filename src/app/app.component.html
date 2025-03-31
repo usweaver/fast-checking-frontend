@@ -1,4 +1,4 @@
-<div [class.min-h-screen]="router.url !== '/login'" [class.pb-18]="router.url !== '/login'">
+<div [ngClass]="{ 'min-h-screen pb-18 md:min-h-[550px] md:pb-0': router.url !== '/login' }">
   @if (router.url !== '/login')
   {<app-header></app-header>
   }
@@ -6,9 +6,9 @@
   <div class="px-2"><router-outlet /></div>
 </div>
 
+<app-alerts></app-alerts>
 @if (router.url !== '/login')
 {
 <app-navbar></app-navbar>
 }
 <app-drawer></app-drawer>
-<app-alerts></app-alerts>

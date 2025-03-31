@@ -1,4 +1,4 @@
-<div class="fixed w-full z-50 flex flex-col gap-2 items-center p-4"
+<div class="fixed w-full z-50 flex flex-col gap-2 items-center p-4 md:sticky"
   [ngClass]="router.url === '/login' ? 'bottom-0' : 'bottom-16'">
   @for (alert of alertsStore.alerts(); track alert.id) {
   <div [@alertAnimation] class="rounded-md w-full pl-4 pr-2 pt-2 pb-3 flex justify-between relative overflow-hidden"
