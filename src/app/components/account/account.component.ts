@@ -88,6 +88,18 @@ export class AccountComponent {
     });
   }
 
+  isMonthInMonthsArray(month: string, monthsArray: string[]): boolean {
+    return monthsArray.indexOf(month) !== -1;
+  }
+
+  getLastMonthTitle(monthsArray: string[]): string {
+    return this.getMonthTitle(monthsArray[monthsArray.length - 1]);
+  }
+
+  setLastMonthData(monthsArray: string[]): void {
+    this.monthData.set(monthsArray[monthsArray.length - 1]);
+  }
+
   isExistingPreviousMonth(month: string, monthsArray: string[]): boolean {
     return monthsArray.indexOf(month) > 0;
   }

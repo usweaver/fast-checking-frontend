@@ -6,7 +6,9 @@
     "start": "ng serve --port 3000 --host 0.0.0.0",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:prod": "ng build --configuration production",
+    "serve:prod": "serve dist/fast-checking-frontend -s -l 3000"
   },
   "private": true,
   "dependencies": {

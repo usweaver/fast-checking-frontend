@@ -5,9 +5,9 @@
     <h2 class="mb-0">Solde actuel</h2>
     <div class="grow"></div>
     <div [ngClass]="{
-    'text-red-400': data.balance < 0,
-    'text-green-400': data.balance >= 0
-  }">
+        'text-red-400': data.balance < 0,
+        'text-green-400': data.balance >= 0
+      }">
       <span class="mr-1">{{data.balance >= 0 ? '+' : ''}}{{data.balance | number:'1.2-2'}}</span>
       <span>€</span>
     </div>
@@ -19,6 +19,7 @@
   </div>
 </div>
 <div class="flex px-3">
+  @if (isMonthInMonthsArray(monthData(), data.months)) {
   @if (isExistingNextMonth(monthData(), data.months)) {
   <span
     class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3 cursor-pointer"
@@ -32,14 +33,26 @@
         (click)="setPreviousMonthData(monthData(), data.months)">{{getPreviousMonthTitle(monthData(),
         data.months)}} ></span>
       }
+
+      } @else {
+      <div class="grow"></div><span
+        class="italic font-oxanium font-semibold uppercase text-neutral-400 text-right block transition-all duration-200 ease-in-out active:text-neutral-200 hover:text-neutral-300 active:translate-y-1 mb-3 cursor-pointer"
+        (click)="setLastMonthData(data.months)">{{getLastMonthTitle(data.months)}} ></span>
+      }
 </div>
 <div class="bg-neutral-700 w-full pt-3 px-3 rounded-t-lg">
   <h2 class="mb-0 text-center">{{getMonthTitle(monthData())}}</h2>
   <hr class="mb-0">
 </div>
 <div class="bg-neutral-700 w-full pb-3 px-3 rounded-b-lg">
+  @if (data.transactions.length > 0) {
   @for (transaction of data.transactions; track transaction.id) {
   <app-transaction-line [transaction]="transaction"></app-transaction-line>
+  }
+  } @else {
+  <div class="w-full inline-flex items-center justify-center py-4">
+    <span class="italic font-oxanium font-semibold uppercase text-neutral-400">Aucunes transactions</span>
+  </div>
   }
 </div>
 } @else {<span class="italic font-oxanium font-semibold uppercase text-neutral-400">Chargement...</span>}
